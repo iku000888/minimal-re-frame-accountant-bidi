@@ -40,9 +40,7 @@
 ;; Routes
 
 (defn current-page []
-  (let [view (subscribe [:view])]
-    (fn []
-      [@view])))
+  [@(subscribe [:view])])
 
 ;; -------------------------
 ;; Initialize app
