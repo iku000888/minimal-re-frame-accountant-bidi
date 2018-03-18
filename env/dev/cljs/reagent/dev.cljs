@@ -1,7 +1,7 @@
 (ns ^:figwheel-no-load reagent.dev
   (:require
-    [reagent.core :as core]
-    [devtools.core :as devtools]))
+   [testapp.core :as core]
+   [devtools.core :as devtools]))
 
 (devtools/install!)
 
