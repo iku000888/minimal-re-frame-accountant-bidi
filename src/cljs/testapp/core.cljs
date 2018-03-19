@@ -26,27 +26,8 @@
  (fn [db [_ handler]]
    (assoc db :view
           (case (:handler handler)
-            :home home-page
-            :about about-page))))
-
-(reg-sub
- :view
- (fn [db]
-   (or (:view db)
-       ;;ensure nil never gets returned
-       home-page)))
-
-;; -------------------------
-;; Routes
-
-(defn current-page []
-  [@(subscribe [:view])])
-
-;; -------------------------
-;; Initialize app
-
-(defn mount-root []
-  (reagent/render [current-page] (.getElementById js/document "app")))
+            :home (reagent/render [home-page] (.getElementById js/document "app"))
+            :about (reagent/render [about-page] (.getElementById js/document "app"))))))
 
 (defn init! []
   (accountant/configure-navigation!
@@ -58,5 +39,4 @@
     :path-exists?
     (fn [path]
       (some? (b/match-route routes path)))})
-  (accountant/dispatch-current!)
-  (mount-root))
+  (accountant/dispatch-current!))
